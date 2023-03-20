@@ -2,6 +2,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// Just for read the secrets anywhere in the application
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+
+builder.Services.AddDbContext<ApiDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection")));
+
+builder.Services.AddAutoMapper(typeof(Program));
+
+//Extenssion method
+builder.Services.ConfigureJWT(builder.Configuration);
+
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+//builder.AddDefaultIdentity<User>(options => options.SignIn.RequiredConfirmedAccount = true)
+//   .AddEntityFrameworkStores<ApiDbContext>();
+
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -18,6 +36,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
