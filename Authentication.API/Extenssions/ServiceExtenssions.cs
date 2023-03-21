@@ -1,4 +1,6 @@
-﻿namespace Authentication.API.Extenssions;
+﻿using Microsoft.Extensions.Options;
+
+namespace Authentication.API.Extenssions;
 
 public static class ServiceExtenssions
 {
@@ -11,11 +13,11 @@ public static class ServiceExtenssions
         services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>
             {
-
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {

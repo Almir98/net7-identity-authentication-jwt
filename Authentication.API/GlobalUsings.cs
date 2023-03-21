@@ -1,7 +1,5 @@
 // Global using directives
 
-global using System.ComponentModel.DataAnnotations;
-global using System.Text;
 global using Authentication.API.Configuration;
 global using Authentication.API.DTOs;
 global using Authentication.API.Extenssions;
@@ -17,3 +15,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.IdentityModel.Tokens;
+global using System.ComponentModel.DataAnnotations;
+global using System.Text;

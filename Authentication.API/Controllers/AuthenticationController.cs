@@ -19,10 +19,10 @@ public class AuthenticationController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var existingUser = _userManager.FindByEmailAsync(userRegistrationDto.Email);
+        //var existingUser = _userManager.FindByEmailAsync(userRegistrationDto.Email);
 
-        if (existingUser != null)
-            return BadRequest(new IdentityResult());
+        //if (existingUser != null)
+        //    return BadRequest(new IdentityResult());
 
         await _authenticationService.RegisterUser(userRegistrationDto);
 
