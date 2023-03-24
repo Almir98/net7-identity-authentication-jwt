@@ -20,7 +20,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 builder.Services.AddAuthentication();
 
-builder.Services.ConfigureIdentity();
+builder.Services.AddIdentityConfiguration();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

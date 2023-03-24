@@ -16,6 +16,5 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
                 NormalizedName = "ADMINISTRATOR"
             }
         );
-
     }
 }

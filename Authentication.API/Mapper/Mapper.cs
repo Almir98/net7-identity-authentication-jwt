@@ -4,6 +4,6 @@ public class Mapper : Profile
 {
     public Mapper()
     {
-        CreateMap<User, UserRegistrationDTO>().ReverseMap();
+        CreateMap<ApplicationUser, UserRegistrationDTO>().ReverseMap();
     }
 }

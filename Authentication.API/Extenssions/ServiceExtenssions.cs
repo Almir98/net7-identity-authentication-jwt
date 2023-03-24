@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace Authentication.API.Extenssions;
+﻿namespace Authentication.API.Extenssions;
 
 public static class ServiceExtenssions
 {
@@ -32,18 +30,22 @@ public static class ServiceExtenssions
                 };
             });
     }
-    public static void ConfigureIdentity(this IServiceCollection services)
+
+    //Configuring and adding Identity for specific type, in this case User and the IdentityRole type
+    public static void AddIdentityConfiguration(this IServiceCollection services)
     {
-        var builder = services.AddIdentity<User, IdentityRole>(o =>
+        var builder = services.AddIdentity<ApplicationUser, IdentityRole>(o =>
             {
                 o.Password.RequireDigit = true;
                 o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
-                o.Password.RequiredLength = 10;
+                o.Password.RequiredLength = 8;
                 o.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<ApiDbContext>()
             .AddDefaultTokenProviders();
+
+        // additional configuration for IdentityServer4
     }
 }
