@@ -5,12 +5,10 @@
 public class IdentityController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
-    private readonly JwtConfig _jwtConfig;
 
-    public IdentityController(IAuthenticationService authenticationService, JwtConfig jwtConfig)
+    public IdentityController(IAuthenticationService authenticationService)
     {
         _authenticationService = authenticationService;
-        _jwtConfig = jwtConfig;
     }
 
     [HttpPost("Register")]
@@ -24,5 +22,17 @@ public class IdentityController : ControllerBase
         await _authenticationService.RegisterUser(userRegistrationDto);
 
         return Ok();
+    }
+
+    [HttpPost("CreateToken")]
+    public async Task<IActionResult> CreateToken([FromBody] UserAuthenticationDTO userAuthenticationDto)
+    {
+        if (!await _authenticationService.ValidateUser(userAuthenticationDto))
+            return Unauthorized();
+
+        return Ok(new
+        {
+            Token = await _authenticationService.CreateToken()
+        });
     }
 }
